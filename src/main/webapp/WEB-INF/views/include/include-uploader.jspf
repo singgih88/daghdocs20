@@ -1,0 +1,16 @@
+<c:if test="${!userOs.locked}">
+<div class="pattern" id="addFilesUploader" style="display: none;">
+		<div class="upload">
+		<form action="?create" enctype="multipart/form-data" method="post"> 
+			<table class="mintable" border="0" cellpadding="2" cellspacing="0" >
+			<tr>
+			<td>	
+					 <input class="default" type="file" id="file4" name="file4" size="50" multiple/><br>
+					 <input type="submit" value="Upload" class="btn btn-sm"/>
+			</td>
+			<tr>
+			</table>
+		</form>
+		</div>
+ </div>
+</c:if>

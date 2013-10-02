@@ -1,0 +1,10 @@
+<a href="${prefix}?update&id=${row.id}" class="enableTooltip" title='<fmt:message key="edit"/>'>
+	<span class="glyphicon glyphicon-edit"></span>
+</a> 
+<a href="javascript:if(confirm('<fmt:message key="response.delete"/>')){self.document.location.href=('${prefix}?delete&id=${row.id}');}" class="enableTooltip" title='<fmt:message key="delete"/>'>
+	<span class="glyphicon glyphicon-remove"></span>
+</a>
+<c:set var="prefix" value=""/>
+
+
+

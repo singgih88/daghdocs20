@@ -1,0 +1,28 @@
+</div>
+
+
+<c:if test="${!empty actas}">
+<div style="bottom: 60px;left:4px; position: absolute;">
+	  	<a href="../secure/user?actas&userPrincipal=${actas}" class="btn btn-inverse enableTooltip" ><i class="icon-user icon-white"></i> <fmt:message key="return"/> ${actas}</a>
+</div>
+</c:if>
+
+<br><br><br>
+<div id="footer" class="navbar-fixed-bottom">
+	<div class="container ">
+		<p class="muted credit">
+			<i class=" icon-info-sign"></i> <small> This is a totally
+				FREE product by <a href="http://blog.daghosoft.com">daghosoft.com</a>.
+				NO rights reserved.
+			 <a href="../secure/credits">Click here to read credits.</a></small>
+		</p>
+	</div>
+</div>
+<script src="../resources/js/script.js"></script>
+<script>
+	$("#nv-${contentListType}  a").css("color","#ffffff");
+</script>
+
+</body>
+</html>
+

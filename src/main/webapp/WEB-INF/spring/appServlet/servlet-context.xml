@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans:beans xmlns="http://www.springframework.org/schema/mvc"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:beans="http://www.springframework.org/schema/beans"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:mvc="http://www.springframework.org/schema/mvc"
+	xmlns:security="http://www.springframework.org/schema/security"
+	xmlns:task="http://www.springframework.org/schema/task"
+	xsi:schemaLocation="http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc.xsd
+		http://www.springframework.org/schema/task http://www.springframework.org/schema/task/spring-task-3.1.xsd
+		http://www.springframework.org/schema/security http://www.springframework.org/schema/security/spring-security-3.1.xsd
+		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
+	<!-- DispatcherServlet Context: defines this servlet's request-processing infrastructure -->
+
+
+ 	
+	<!-- Enables the Spring MVC @Controller programming model -->
+	<annotation-driven />
+	<context:component-scan base-package="com.daghosoft.daghlink.controller.ControllerJson" />
+ 
+ <!-- Email configuration -->
+	<beans:bean id="mailSender" class="org.springframework.mail.javamail.JavaMailSenderImpl">
+        <beans:property name="javaMailProperties">
+            <beans:props>
+                <beans:prop key="mail.transport.protocol">smtp</beans:prop>
+                <beans:prop key="mail.smtp.auth">true</beans:prop>
+                <beans:prop key="mail.smtp.starttls.enable">true</beans:prop>
+            </beans:props>
+        </beans:property>
+    </beans:bean>
+  
+   <beans:bean id="velocityEngine" class="org.springframework.ui.velocity.VelocityEngineFactoryBean">
+      <beans:property name="velocityProperties">
+         <beans:value>
+          resource.loader=class
+          class.resource.loader.class=org.apache.velocity.runtime.resource.loader.ClasspathResourceLoader
+         </beans:value>
+      </beans:property>
+   </beans:bean>  
+ <!-- End Email configuration -->
+ 
+ <!-- Feed configuration -->
+	<beans:bean class="org.springframework.web.servlet.view.BeanNameViewResolver"/>
+	<beans:bean id="rssViewer" class="com.daghosoft.daghlink.view.ViewFeed" />
+	<beans:bean id="rssViewerFile" class="com.daghosoft.daghlink.view.ViewFeedFile" />
+ <!-- End Feed configuration -->
+ 
+ 
+ 
+	<!-- Handles HTTP GET requests for /resources/** by efficiently serving up static resources in the ${webappRoot}/resources directory -->
+	<resources mapping="/resources/**" location="/resources/" />
+	
+	<!-- Resolves views selected for rendering by @Controllers to .jsp resources in the /WEB-INF/views directory -->
+	<beans:bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+		<beans:property name="prefix" value="/WEB-INF/views/" />
+		<beans:property name="suffix" value=".jsp" />
+	</beans:bean>
+
+	<context:component-scan base-package="com.daghosoft.daghlink"/>
+
+	<security:global-method-security secured-annotations="enabled" />
+
+	 <mvc:interceptors>
+		<mvc:interceptor>
+			<mvc:mapping path="/secure/**" />
+			<beans:bean class="com.daghosoft.daghlink.service.Interceptor"/>
+		</mvc:interceptor>
+	</mvc:interceptors>
+	
+	<task:annotation-driven scheduler="taskScheduler" executor="taskExecutor"/>
+	<task:scheduler id="taskScheduler" pool-size="2"/>
+	<task:executor id="taskExecutor" pool-size="5"/>
+
+<!-- 
+	<beans:bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+        <beans:property name="maxUploadSize" value="1048576000"/>
+	</beans:bean>
+-->
+<context:annotation-config />
+ 
+	<beans:bean id="customerService" class="com.daghosoft.daghlink.service.ServiceStartup">
+	</beans:bean>
+
+
+
+<!-- Service Group -->
+<beans:bean  id="grplink" class="com.daghosoft.daghlink.service.ServiceGroup">
+ <beans:property name="daoGroup" ref="daoGroupLink"></beans:property>
+</beans:bean>
+<beans:bean  id="grpfile" class="com.daghosoft.daghlink.service.ServiceGroup">
+ <beans:property name="daoGroup" ref="daoGroupFile"></beans:property>
+</beans:bean>
+<!-- End Service Group -->
+
+</beans:beans>

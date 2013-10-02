@@ -1,0 +1,26 @@
+<%@ include file="./lib.jsp"%>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<title><fmt:message key="link"/></title>
+</head>
+<link href="../resources/css/bootstrap.min.css" rel="stylesheet">
+<link href="../resources/css/bootstrap-responsive.min.css" rel="stylesheet">
+<link href="../resources/css/screen.css" rel="stylesheet">
+<script src="../resources/js/jquery.js"></script>
+<script src="../resources/js/bootstrap.min.js"></script>
+
+	<!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+      <script src="../resources/assets/js/html5shiv.js"></script>
+      <script src="../resources/assets/js/respond.min.js"></script>
+    <![endif]-->
+
+<script type="text/javascript">
+function openWindow(url){
+	window.open(url,'','top=10, left=10, width=400, height=400, status=no, menubar=no, toolbar=no, scrollbars=yes');
+}
+</script>
+
+
+ 

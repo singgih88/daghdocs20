@@ -1,0 +1,11 @@
+#include( "com/daghosoft/daghlink/view/includeHead.txt" )
+${body}
+<br>
+<br>
+
+${feeddes} :<br>
+${feed}
+<br>
+<br>
+
+#include( "com/daghosoft/daghlink/view/includeFoot.txt" )
